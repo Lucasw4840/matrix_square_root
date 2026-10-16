@@ -31,3 +31,10 @@ does not attempt a Schur decomposition fallback.
 
 Entries may be `int`, `float`, or `complex`; the result is always `float` or
 `complex` because the iteration divides at every step.
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
